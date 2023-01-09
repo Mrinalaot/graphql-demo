@@ -15,6 +15,7 @@ const typeDefs = gql`
     lastName: String
     email: String
     password: String
+    quotes: [Quote]
   }
 
   type Quote {
@@ -29,6 +30,9 @@ const resolvers = {
     users: () => users,
     quotes: () => quotes,
   },
+  User: {
+    quotes: ({id}) => quotes.filter(({by})=> by === id) 
+  }
 };
 
 const server = new ApolloServer({
