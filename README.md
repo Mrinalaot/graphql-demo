@@ -20,3 +20,14 @@ query getAllQuotes {
     by
   }
 }
+
+query getAllUserQueries {
+  users {
+    id
+    firstName
+    email
+    quotes {
+      name
+    }
+  }
+}
