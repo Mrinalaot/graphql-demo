@@ -23,6 +23,15 @@ const typeDefs = gql`
     name: String
     by: String
   }
+
+  type Mutation {
+    createUser(
+    firstName: String!,
+    lastName: String!,
+    email: String!,
+    password: String!,
+    ): User 
+  }
 `;
 
 const resolvers = {
@@ -30,10 +39,24 @@ const resolvers = {
     greet: () => "Hello World",
     users: () => users,
     quotes: () => quotes,
-    user: (_, req) => users.find(({id})=> id === req.id)
+    user: (_, req) => users.find(({id})=> id === req.id),
   },
   User: {
     quotes: ({id}) => quotes.filter(({by})=> by === id) 
+  },
+  Mutation: {
+    createUser: async(_, {firstName, lastName, email, password}) => {
+      console.log("User Created");
+      users.push({
+        id: Math.random().toString(),
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+
+      return users[users.length - 1];
+    }
   }
 };
 
