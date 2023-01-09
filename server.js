@@ -7,6 +7,7 @@ const typeDefs = gql`
     greet: String
     users : [User]
     quotes: [Quote]
+    user(id: ID!): User
   }
 
   type User {
@@ -29,6 +30,7 @@ const resolvers = {
     greet: () => "Hello World",
     users: () => users,
     quotes: () => quotes,
+    user: (_, req) => users.find(({id})=> id === req.id)
   },
   User: {
     quotes: ({id}) => quotes.filter(({by})=> by === id) 

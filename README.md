@@ -6,7 +6,7 @@ npm start
 ```
 
 ### Queries
-query getAllQueries {
+query getAllUsers {
   users {
     id
     firstName
@@ -21,7 +21,7 @@ query getAllQuotes {
   }
 }
 
-query getAllUserQueries {
+query getAllUsersWithQuotes {
   users {
     id
     firstName
@@ -29,5 +29,13 @@ query getAllUserQueries {
     quotes {
       name
     }
+  }
+}
+
+query getUser {
+  user (id: 23131){
+    id
+    firstName
+    email
   }
 }
